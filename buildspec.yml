@@ -1,3 +1,5 @@
+version: 0.2
+
 phases:
   install: # phase d'installation des dépendances
     runtime-versions:
