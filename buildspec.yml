@@ -14,7 +14,7 @@ phases:
     commands:
       - echo Running tests...
       - python -m unittest discover -s . -p "test_*.py"
-      - pytest --junitxml=reports/test-results.xml --tb=short # Generate JUnit XML report
+      - python -m pytest --junitxml=reports/test-results.xml --tb=short # Generate JUnit XML report
   post_build: # phase après la construction
     commands:
       - echo Build completed on `date`
