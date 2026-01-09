@@ -1,0 +1,28 @@
+phases:
+  install: # phase d'installation des dépendances
+    runtime-versions:
+      python: 3.8
+    commands: -echo Installing dependencies...
+      - pip install -r requirements.txt
+  prebuild: # phase avant la construction
+    commands:
+      - echo Pre-build phase...
+  build: # phase de construction
+    commands:
+      - echo Running tests...
+      - python -m unittest discover -s . -p "test_*.py"
+      - pytest --junitxml=reports/test-results.xml --tb=short # Generate JUnit XML report
+  post_build: # phase après la construction
+    commands:
+      - echo Build completed on `date`
+      - echo Build completed successfully!
+
+  artifacts: # spécification des artefacts
+    files:
+      - "**/*" # Include all files
+    base-directory: "." # Base directory for artifacts
+  reports: # spécification des rapports
+    pytest-report: # Nom du rapport
+      files:
+        - reports/test-results.xml # Chemin vers le fichier de rapport JUnit XML
+      discard-paths: yes
